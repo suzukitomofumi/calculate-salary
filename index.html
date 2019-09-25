@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>初めての創作ゲーム</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div class="submit">
+        <h1>JSの練習 給与計算</h1>
+        <p>1日だいたい<input type="text" value="3" id="dateTime" name="dateTime">時間働いています</p>
+        <p>1週間でだいたい<input type="text" value="4" id="weekly" name="weekly">日間働きます</p>
+        <p>働いているところのお店の時給は<input type="text" value="1000" id="hourlyWage" name="hourlyWage">円です</p>
+        <p>希望としては月に<input type="text" value="50000" id="desired" name="desired">円稼ぎたいです</p>
+        <p><input type="button" value="計算する！" onclick="getSalary();"></p>
+    </div>
+
+    <div class="answer">
+            <p>月に<span id="monthlyTime">???</span>時間働いていて、月収<span id="monthlyWage">?????</span>円くらいですね。</p>
+            <p><span id="diff"></span><span id="message"></span></p>
+
+    </div>
+
+    <script>
+    'use strict';
+        
+    function getSalary(){
+        // 入力値の取得
+        var dateTime = document.getElementById('dateTime').value;
+        var weekly = document.getElementById('weekly').value;
+        var hourlyWage = document.getElementById('hourlyWage').value;
+        var desired = document.getElementById('desired').value;
+        // 入力値の計算
+        var monthlyTime = dateTime * weekly * 4;
+        var monthlyWage = monthlyTime * hourlyWage;
+        
+        // 給料の表示
+        document.getElementById('monthlyTime').textContent = monthlyTime;
+        document.getElementById('monthlyWage').textContent = monthlyWage;
+        if(monthlyWage > desired){
+            var diff = monthlyWage - desired;
+            document.getElementById('diff').textContent = `あなたの希望収入よりも${diff}円多く稼いでいます。`;
+            document.getElementById('message').textContent = `少しは休んでもいいかもれませんね！`;
+        } else {
+            var diff = desired - monthlyWage ;
+            document.getElementById('diff').textContent = `あなたの希望収入まであと${diff}円稼がなければいけません。`;
+            document.getElementById('message').textContent = `頑張りましょう！！`;
+            
+        }
+    }
+
+    </script>
+
+</body>
+</html>
